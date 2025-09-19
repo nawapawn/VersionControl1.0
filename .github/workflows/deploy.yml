@@ -2,14 +2,14 @@ name: Deploy Quasar SPA to GitHub Pages
 
 on:
   push:
-    branches: [ "master" ] # เปลี่ยนเป็น branch ที่คุณใช้
+    branches: [ "main" ] # เปลี่ยนเป็น branch ที่คุณใช้
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write  # Allow pushing to gh-pages
-      
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,6 +28,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_PAT }}  # 🔒 Reference the secret
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # ใช้ token ของ Actions แทน GH_PAT
           publish_dir: dist/spa
-
